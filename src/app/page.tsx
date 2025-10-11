@@ -1,103 +1,183 @@
+"use client";
+
+import "./globals.css";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import TechStackCarousel from "./components/TechStackCarousel";
+import ExperienceTimeline from "./components/ExperienceTimeline";
+import AboutSection from "./components/AboutSection";
+import RecentProjects from "./components/RecentProjects";
+import BeyondCoding from "./components/BeyondCoding";
+import Recommendations from "./components/Recommendations";
+import RecentCertifications from "./components/RecentCertifications";
+import Footer from "./components/Footer";
+
+import { useState } from "react";
+import {
+  Github,
+  Facebook,
+  Mail,
+  MapPin,
+  BadgeCheck,
+  BriefcaseBusiness,
+} from "lucide-react";
+
+function EmailModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("kristianmontero15@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // revert after 2 seconds
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 backdrop-blur-sm transition-opacity">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="bg-white dark:bg-zinc-900 rounded-3xl p-8 w-11/12 sm:w-96 shadow-2xl border border-zinc-200 dark:border-zinc-700 relative flex flex-col items-center text-center"
+          >
+            {/* Close button */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white text-lg font-bold"
+            >
+              ✕
+            </button>
+
+            <Mail size={40} className="text-blue-500 mb-4" />
+            <h2 className="text-2xl font-bold mb-2 text-zinc-900 dark:text-zinc-100">
+              Get in Touch!
+            </h2>
+            <p className="text-zinc-700 dark:text-zinc-300 mb-6">
+              Email me here:{" "}
+              <span className="font-semibold text-blue-500">
+                kristianmontero15@gmail.com
+              </span>
+            </p>
+
+            {/* Copy Button */}
+            <button
+              onClick={handleCopy}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all"
+            >
+              {copied ? "Copied!" : "Copy Email"}
+            </button>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function Socials() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <>
+      <div className="flex gap-4 mt-3 sm:mt-0">
+        <a
+          href="https://github.com/kristian200215"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-black dark:hover:text-white transition transform hover:scale-110"
+          title="GitHub"
+        >
+          <Github size={20} />
+        </a>
+        <a
+          href="https://www.facebook.com/Kristian152002"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-blue-600 hover:text-white transition transform hover:scale-110"
+          title="Facebook"
+        >
+          <Facebook size={20} />
+        </a>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-red-500 hover:text-white transition transform hover:scale-110"
+          title="Message Me"
+        >
+          <Mail size={20} />
+        </button>
+      </div>
+
+      {/* Email Modal */}
+      <EmailModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 flex flex-col items-center px-6 py-6 transition-colors duration-500">
+      {/* Header */}
+      <header className="max-w-6xl w-full mb-5 flex flex-col sm:flex-row sm:justify-between items-center sm:items-start gap-4 sm:gap-0">
+        {/* Left: Profile + Info */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+          <Image
+            src="/profile.jpg"
+            alt="Profile"
+            width={120}
+            height={120}
+            className="rounded-full border-4 border-zinc-300 dark:border-zinc-700 shadow-lg"
+          />
+          <div className="text-center sm:text-left">
+            <h1 className="mt-4 text-2xl sm:text-3xl font-bold">
+              Ephraim Christian B. Montero{" "}
+              <BadgeCheck size={16} className="inline text-blue-500" />
+            </h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <p className="flex items-center justify-center sm:justify-start text-zinc-500 dark:text-zinc-400 gap-1">
+              <MapPin size={16} />
+              Tarangnan, Samar, Philippines
+            </p>
+            <p className="text-zinc-600 dark:text-zinc-300 text-xl">
+              Software Engineer / Gamer
+            </p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* Socials */}
+        <Socials />
+      </header>
+
+      <section className="grid gap-6 sm:grid-cols-2 max-w-6xl w-full">
+        {/* About + Experience Row */}
+        <div className="col-span-full grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          <div className="flex flex-col gap-6">
+            <AboutSection />
+            <TechStackCarousel />
+          </div>
+          <ExperienceTimeline />
+        </div>
+        <div className="sm:col-span-2 flex justify-center">
+          <div className="w-full max-w-4xl">
+            <RecentProjects />
+          </div>
+        </div>
+        <div className="col-span-full">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6">
+            <BeyondCoding />
+            <Recommendations />
+          </div>
+        </div>
+        <div className="col-span-full">
+          <RecentCertifications />
+        </div>
+      </section>
+      <Footer />
+    </main>
   );
 }
