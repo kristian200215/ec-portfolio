@@ -80,15 +80,22 @@ export default function RecentProjects() {
         {/* Navigation Buttons */}
         <button
           onClick={prevSlide}
-          className="absolute top-1/2 left-0 -translate-y-1/2 px-2 py-2 text-zinc-700 dark:text-zinc-300 hover:text-blue-500 transition"
+          className="absolute top-1/2 left-2 sm:left-0 -translate-y-1/2
+             z-30 p-2
+             text-zinc-700 dark:text-zinc-300
+             hover:text-blue-500 transition"
         >
-          <ChevronLeft className="w-10 h-10" />
+          <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10" />
         </button>
+
         <button
           onClick={nextSlide}
-          className="absolute top-1/2 right-0 -translate-y-1/2 px-2 py-2 text-zinc-700 dark:text-zinc-300 hover:text-blue-500 transition"
+          className="absolute top-1/2 right-2 sm:right-0 -translate-y-1/2
+             z-30 p-2
+             text-zinc-700 dark:text-zinc-300
+             hover:text-blue-500 transition"
         >
-          <ChevronRight className="w-10 h-10" />
+          <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10" />
         </button>
       </div>
 
