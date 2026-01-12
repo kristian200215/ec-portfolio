@@ -141,7 +141,7 @@ export default function Home() {
       <header className="max-w-6xl w-full mb-5 flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:items-start">
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <Image
-            src={isDark ? "/profile.jpg" : "/profile1.jpg"}
+            src={isDark ? "/profile1.jpg" : "/profile.jpg"}
             alt="Profile"
             width={120}
             height={120}
