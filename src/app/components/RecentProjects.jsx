@@ -37,14 +37,14 @@ export default function RecentProjects() {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-2xl font-bold mb-8 text-center flex items-center gap-2"
+        className="text-2xl font-bold text-center flex items-center gap-2"
       >
-        <PanelsTopLeft /> Recent Projects - Public
+        <PanelsTopLeft /> Recent Projects
       </motion.h2>
 
       {/* Carousel */}
       <div className="relative w-full max-w-4xl flex items-center justify-center overflow-hidden">
-        <div className="flex items-center justify-center w-full relative h-[20rem]">
+        <div className="flex items-center justify-center w-full relative h-[15rem]">
           {projects.map((project, index) => {
             let offset = index - current;
             // Wrap around for infinite loop
