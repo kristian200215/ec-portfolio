@@ -10,6 +10,7 @@ import BeyondCoding from "./components/BeyondCoding";
 import Recommendations from "./components/Recommendations";
 import RecentCertifications from "./components/RecentCertifications";
 import Footer from "./components/Footer";
+import ShowcaseCarousel from "./components/ShowcaseCarousel";
 
 import { useState } from "react";
 import {
@@ -204,7 +205,7 @@ export default function Home() {
                   Explore my work <ArrowDown size={16} />
                 </a>
                 <a
-                  href="/showcase"
+                  href="#showcase"
                   className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-semibold transition hover:border-blue-400 hover:text-blue-600 dark:border-zinc-700 dark:hover:text-blue-400"
                 >
                   Showcase <GalleryHorizontalEnd size={16} />
@@ -228,6 +229,10 @@ export default function Home() {
           className="scroll-mt-8 rounded-3xl border border-zinc-200/80 bg-white/60 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/40"
         >
           <RecentProjects />
+        </div>
+
+        <div className="rounded-3xl border border-zinc-200/80 bg-white/60 p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/40 sm:p-8">
+          <ShowcaseCarousel />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6">
